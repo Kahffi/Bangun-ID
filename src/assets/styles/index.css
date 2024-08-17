@@ -66,6 +66,7 @@ button {
 .btn-pr,
 .btn-sc {
 	color: var(--cl-white-sc);
+	font-size: 1rem;
 }
 
 .btn-pr {
