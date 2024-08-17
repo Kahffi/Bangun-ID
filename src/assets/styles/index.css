@@ -1,0 +1,77 @@
+/* khula-regular - latin */
+@font-face {
+	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	font-family: "Khula";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../fonts/khula-v12-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* khula-700 - latin */
+@font-face {
+	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	font-family: "Khula";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../fonts/khula-v12-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+:root {
+	/* font */
+	font-family: khula, Arial, Helvetica, sans-serif;
+
+	/* color */
+	--cl-blue-pr: #0a74da;
+	--cl-green-pr: #28a745;
+	--cl-grey-sc: #343a40;
+	--cl-yellow-sc: #ffc107;
+	--cl-red-ac: #dc3545;
+	--cl-lightblue-bg: #e3f2fd;
+	--cl-white-bg: #f8f9fa;
+	--cl-grey-ol: #b1b1b1;
+	--cl-white-sc: #f5f5f5;
+}
+
+body,
+html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span {
+	margin: 0;
+}
+
+button {
+	cursor: pointer;
+	border: 0;
+}
+
+#App {
+	display: flex;
+	flex-direction: column;
+	height: 100dvh;
+}
+
+#auth-page {
+	flex: 1;
+}
+
+.btn-pr,
+.btn-sc {
+	color: var(--cl-white-sc);
+}
+
+.btn-pr {
+	background-color: var(--cl-blue-pr);
+}
+
+.btn-sc {
+	background-color: var(--cl-grey-sc);
+}

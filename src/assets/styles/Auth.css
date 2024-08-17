@@ -1,0 +1,76 @@
+#auth-page {
+	display: flex;
+}
+
+.auth-left,
+.auth-right {
+	flex: 1;
+}
+
+.auth-left {
+	background: url(../images/Background-1.svg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position-y: 80%;
+	border-radius: 0 20px 20px 0;
+}
+
+.auth-right {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+}
+
+form > .text-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.auth-form .text-wrapper input {
+	padding: 0.5rem 0.3rem;
+	border-radius: 6px;
+}
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	/* border: 1px solid black; */
+	min-width: 400px;
+}
+
+.btn-cta-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.auth-form .btn-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+}
+
+.auth-form button {
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.9rem 1rem;
+}
+
+.separator {
+	align-items: center;
+	padding: 0.8rem 0;
+	position: relative;
+}
+
+.btn-group .separator p {
+	position: absolute;
+	padding: 0 1rem;
+	top: 50%; /* position the top  edge of the element at the middle of the parent */
+	left: 50%; /* position the left edge of the element at the middle of the parent */
+	transform: translate(-50%, -50%);
+	background: white;
+}
