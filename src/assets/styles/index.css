@@ -76,3 +76,13 @@ button {
 .btn-sc {
 	background-color: var(--cl-grey-sc);
 }
+.navbar-wrapper {
+	display: flex;
+	background-color: var(--cl-white-bg);
+	align-items: center;
+	padding: 1rem 2rem;
+}
+
+.navbar-wrapper .navbar-logo {
+	color: var(--cl-green-pr);
+}

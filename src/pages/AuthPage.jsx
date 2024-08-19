@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Login from "../components/Login";
+import Login from "../components/LoginForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import "../assets/styles/Auth.css";
-import Signup from "../components/Signup";
+import Signup from "../components/SignupForm";
 
 export default function AuthPage() {
 	const [section, setSection] = useState("login");
@@ -43,13 +43,19 @@ export default function AuthPage() {
 					<Signup ButtonGroup={ButtonGroup} />
 				)}
 				<section>
-					{section === "login" ? "Belum punya akun? " : "Sudah punya akun? "}
+					<strong>
+						{section === "login" ? "Belum punya akun? " : "Sudah punya akun? "}
 
-					{section === "login" ? (
-						<span onClick={toSignUp}>Daftar</span>
-					) : (
-						<span onClick={toLogin}>Masuk</span>
-					)}
+						{section === "login" ? (
+							<strong className="cursor-pointer" onClick={toSignUp}>
+								Daftar
+							</strong>
+						) : (
+							<strong className="cursor-pointer" onClick={toLogin}>
+								Masuk
+							</strong>
+						)}
+					</strong>
 				</section>
 			</div>
 		</div>

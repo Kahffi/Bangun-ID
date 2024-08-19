@@ -1,12 +1,11 @@
 import { useState } from "react";
-import "./assets/styles/App.css";
 import Navbar from "./components/Navbar";
 import AuthPage from "./pages/AuthPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
 	return (
 		<div id="App">
-			<Navbar />
 			<AuthPage />
 		</div>
 	);
