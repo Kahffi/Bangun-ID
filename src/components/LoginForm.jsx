@@ -33,6 +33,7 @@ export default function Login({ ButtonGroup }) {
 			<div className="text-wrapper">
 				<label htmlFor="login-email">Email</label>
 				<input
+					autoComplete="on"
 					required
 					type="text"
 					id="login-email"
@@ -43,6 +44,7 @@ export default function Login({ ButtonGroup }) {
 			<div className="text-wrapper">
 				<label htmlFor="login-password">Kata sandi</label>
 				<input
+					autoComplete="on"
 					required
 					type="password"
 					name="password"

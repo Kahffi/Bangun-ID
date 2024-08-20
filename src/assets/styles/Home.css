@@ -12,9 +12,13 @@
 	display: flex;
 	flex-direction: column;
 	width: 750px;
+	height: 500px;
+	border-radius: 20;
+	overflow: hidden;
 }
 
 .post-wrapper .top-bar {
+	max-height: 52px;
 	padding: 0.5rem 1rem;
 	display: flex;
 	align-items: center;
@@ -25,10 +29,13 @@
 .post-content.fullsize {
 	display: flex;
 	flex-direction: row;
+	max-height: calc(100% - 52px);
 }
 
 .post-content.fullsize .content {
 	flex: 1;
+	overflow-y: scroll;
+	padding-bottom: 2rem;
 }
 
 .post-content.fullsize .content article {
@@ -42,6 +49,7 @@
 }
 
 .post-content .image-container {
+	max-height: 100%;
 	border-right: 1px solid black;
 	flex: 1;
 }
@@ -50,10 +58,15 @@
 	height: 100%;
 }
 
-.interaction-wrapper {
+.post-control-wrapper {
+	gap: 1.5rem;
+	display: flex;
 	padding: 0.3rem 0.5rem;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
+}
+
+.interaction-wrapper {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -75,4 +88,16 @@
 
 .post-address p {
 	border-right: 1px solid black;
+}
+
+.interaction-icon {
+	width: 20px;
+}
+
+.interaction-wrapper button {
+	background: none;
+	font-size: 1.2rem;
+}
+.interaction-wrapper button:active {
+	font-size: 1rem;
 }

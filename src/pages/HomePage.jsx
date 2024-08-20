@@ -6,7 +6,8 @@ import "../assets/styles/Home.css";
 const post = {
 	title: "Jembatan rusak",
 	user: "Doe John",
-	description: "oh may gat",
+	description:
+		"human gentle nature another tail largest pot there length negative naturally eye electric automobile stream eaten flag point everywhere serious vegetable result ride shine smile stiff sink softly throughout fair activity everybody spent belt gas degree peace wear thy mixture offer center either occasionally theory way young flower",
 	location: [-6.21462, 6.84513],
 };
 

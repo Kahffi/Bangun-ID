@@ -24,6 +24,7 @@ export default function Signup({ ButtonGroup }) {
 			<div className="text-wrapper">
 				<label htmlFor="signup-email">Email</label>
 				<input
+					autoComplete="on"
 					required
 					type="text"
 					name="email"
@@ -34,6 +35,7 @@ export default function Signup({ ButtonGroup }) {
 			<div className="text-wrapper">
 				<label htmlFor="signup-password">Kata sandi</label>
 				<input
+					autoComplete="on"
 					required
 					type="password"
 					id="signup-password"
@@ -44,6 +46,7 @@ export default function Signup({ ButtonGroup }) {
 			<div className="text-wrapper">
 				<label htmlFor="signup-username">Nama pengguna</label>
 				<input
+					autoComplete="on"
 					required
 					type="text"
 					id="signup-username"
