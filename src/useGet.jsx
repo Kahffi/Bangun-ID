@@ -31,3 +31,5 @@ function useGet(url, body, header = { "Content-Type": "application/json" }) {
 
 	return { data, isPending, error };
 }
+
+export default useGet;

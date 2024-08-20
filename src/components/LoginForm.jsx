@@ -2,7 +2,7 @@ import { useState } from "react";
 import usePost from "../usePost";
 
 export default function Login({ ButtonGroup }) {
-	const { error, fetchData, isPending, response } = usePost();
+	const { error, fetchData, isPending, data } = usePost();
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -14,6 +14,16 @@ export default function Login({ ButtonGroup }) {
 			password: formData.get("password"),
 		};
 		fetchData("https://infrainsight.vercel.app/user/login", loginData);
+	}
+
+	function ErrorMessage() {
+		console.log(error, "the error");
+
+		if (error === 400) {
+			return <h1>Email atau Password yang anda masukkan salah</h1>;
+		} else {
+			return <h1>Error Occured</h1>;
+		}
 	}
 
 	return (
@@ -41,8 +51,8 @@ export default function Login({ ButtonGroup }) {
 				/>
 			</div>
 			{isPending && <h1>Loading...</h1>}
-			{response && <h1>Response ok</h1>}
-			{error && <h1>error occured</h1>}
+			{data && <h1>Response ok</h1>}
+			{error && <ErrorMessage />}
 			<ButtonGroup />
 		</form>
 	);

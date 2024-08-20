@@ -48,7 +48,12 @@ span {
 	margin: 0;
 }
 
+p {
+	font-size: 1rem;
+}
+
 button {
+	font-family: Arial, Helvetica, sans-serif;
 	cursor: pointer;
 	border: 0;
 }
@@ -69,6 +74,12 @@ button {
 	font-size: 1rem;
 }
 
+.btn-pr.small,
+.btn-sc.smalll {
+	padding: 0.4em 0.7em;
+	border-radius: 0.6em;
+}
+
 .btn-pr {
 	background-color: var(--cl-blue-pr);
 }
@@ -85,4 +96,9 @@ button {
 
 .navbar-wrapper .navbar-logo {
 	color: var(--cl-green-pr);
+}
+
+.text-small.secondary {
+	font-size: 0.8rem;
+	color: var(--cl-grey-sc);
 }

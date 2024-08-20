@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function usePost() {
 	const [isPending, setIsPending] = useState(false);
@@ -12,6 +12,7 @@ function usePost() {
 	) {
 		setIsPending(true);
 		try {
+			setError(false);
 			const res = await fetch(url, {
 				method: "POST",
 				body: JSON.stringify(body),
@@ -20,9 +21,8 @@ function usePost() {
 			const resData = await res.json();
 
 			// check if the retrieved data ok to use
-			// 500 mean ok, 400 for wrong email/password
-			if (resData.status !== 500)
-				throw new Error(`${resData.status}, ${resData.message}`);
+			// if (resData.status !== 200)
+			// 	throw new Error(`${resData.status}, ${resData.message}`);
 			setData({ ...resData });
 			console.log(resData, "GET Response data");
 		} catch (err) {
