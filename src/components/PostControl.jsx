@@ -1,8 +1,9 @@
-import { faComment } from "@fortawesome/free-regular-svg-icons";
+import { faComment, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons/faHeart";
 import {
 	faHeart as faHeartSolid,
 	faShareAlt,
+	faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -12,7 +13,8 @@ export default function PostControl() {
 	const [likeCount, setLikeCount] = useState(51);
 	const [isShared, setIsShared] = useState(false);
 	const [shareCount, setShareCount] = useState(40);
-	const [commentCount, setcommentCount] = useState(40);
+	const [isOwned, setIsOwned] = useState(false);
+	// const [commentCount, setcommentCount] = useState(40);
 
 	function handleLike() {
 		isLiked
@@ -27,6 +29,11 @@ export default function PostControl() {
 		!isShared && setIsShared(true);
 	}
 
+	function handleDelete() {
+		if (!isOwned) return;
+
+		alert("post deleted");
+	}
 	return (
 		<div className="post-control-wrapper">
 			<div className="interaction-wrapper">
@@ -44,6 +51,13 @@ export default function PostControl() {
 					<FontAwesomeIcon icon={faShareAlt} style={{ color: "black" }} />
 				</button>
 				<p className="interaction-count">{shareCount}</p>
+			</div>
+			<div className="interaction-wrapper">
+				<button onClick={handleDelete}>
+					{isOwned && (
+						<FontAwesomeIcon icon={faTrashAlt} style={{ color: "red" }} />
+					)}
+				</button>
 			</div>
 		</div>
 	);

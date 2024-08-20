@@ -7,11 +7,14 @@
 }
 
 .post-wrapper {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 	margin-top: 30px;
 	background-color: var(--cl-white-bg);
 	display: flex;
 	flex-direction: column;
-	width: 750px;
+	width: 70vw;
+	min-width: 400px;
 	height: 500px;
 	border-radius: 20;
 	overflow: hidden;
@@ -19,11 +22,11 @@
 
 .post-wrapper .top-bar {
 	max-height: 52px;
-	padding: 0.5rem 1rem;
+	padding: 0.6rem 1rem;
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid var(--cl-grey-ol);
 }
 
 .post-content.fullsize {
@@ -34,8 +37,9 @@
 
 .post-content.fullsize .content {
 	flex: 1;
-	overflow-y: scroll;
+	overflow-y: auto;
 	padding-bottom: 2rem;
+	flex-basis: 6rem;
 }
 
 .post-content.fullsize .content article {
@@ -50,7 +54,7 @@
 
 .post-content .image-container {
 	max-height: 100%;
-	border-right: 1px solid black;
+	border-right: 1px solid var(--cl-grey-ol);
 	flex: 1;
 }
 .post-content .image-container img {
@@ -62,8 +66,8 @@
 	gap: 1.5rem;
 	display: flex;
 	padding: 0.3rem 0.5rem;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
+	border-top: 1px solid var(--cl-grey-ol);
+	border-bottom: 1px solid var(--cl-grey-ol);
 }
 
 .interaction-wrapper {
@@ -78,7 +82,7 @@
 
 .post-address {
 	padding: 0.3rem 0.5rem;
-	border: 1px solid black;
+	border: 1px solid var(--cl-grey-ol);
 	border-radius: 0.7rem;
 	display: flex;
 	align-items: center;
@@ -87,7 +91,7 @@
 }
 
 .post-address p {
-	border-right: 1px solid black;
+	border-right: 1px solid var(--cl-grey-ol);
 }
 
 .interaction-icon {
