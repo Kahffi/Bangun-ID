@@ -1,32 +1,47 @@
+import { useState } from "react";
 import "../assets/styles/Auth.css";
+import usePost from "../usePost";
 
 export default function Signup({ ButtonGroup }) {
-	async function handleSubmit(e) {
-		try {
-			e.preventDefault();
+	const { error, isPending, response: data, fetchData } = usePost();
+	// async function handleSubmit(e) {
+	// 	try {
+	// 		e.preventDefault();
 
-			const formData = new FormData(e.target);
+	// 		const formData = new FormData(e.target);
 
-			const signupData = {
-				username: formData.get("username"),
-				email: formData.get("email"),
-				password: formData.get("password"),
-			};
+	// 		const signupData = {
+	// 			username: formData.get("username"),
+	// 			email: formData.get("email"),
+	// 			password: formData.get("password"),
+	// 		};
 
-			console.log(signupData);
-			const response = await fetch(
-				"https://infrainsight.vercel.app/user/signup",
-				{
-					method: "POST",
-					mode: "cors",
-					// headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(signupData),
-				}
-			);
-			console.log(response);
-		} catch (err) {
-			console.error(err);
-		}
+	// 		console.log(signupData);
+	// 		const response = await fetch(
+	// 			"https://infrainsight.vercel.app/user/signup",
+	// 			{
+	// 				method: "POST",
+	// 				headers: { "Content-Type": "application/json" },
+	// 				body: JSON.stringify(signupData),
+	// 			}
+	// 		);
+	// 		console.log(response);
+	// 	} catch (err) {
+	// 		console.error(err);
+	// 	}
+	// }
+
+	function handleSubmit(e) {
+		e.preventDefault();
+
+		const formData = new FormData(e.target);
+
+		const signupData = {
+			username: formData.get("username"),
+			email: formData.get("email"),
+			password: formData.get("password"),
+		};
+		fetchData("https://infrainsight.vercel.app/user/signup", signupData);
 	}
 
 	return (
@@ -62,6 +77,9 @@ export default function Signup({ ButtonGroup }) {
 					name="username"
 				/>
 			</div>
+
+			{isPending && <h1>Loading</h1>}
+			{data && <h1>Request success</h1>}
 			<ButtonGroup />
 		</form>
 	);

@@ -1,14 +1,19 @@
 import { useState } from "react";
+import usePost from "../usePost";
 
 export default function Login({ ButtonGroup }) {
-	async function handleSubmit(e) {
-		// const [isLoading, setIsLoading] = useState(true);
-		// const [response, setResponse] = useState(null);
+	const { error, fetchData, isPending, response } = usePost();
 
-		fetch("https://infrainsight.vercel.app/user/login", {
-			mode: "POST",
-			body: {},
-		});
+	function handleSubmit(e) {
+		e.preventDefault();
+
+		const formData = new FormData(e.target);
+
+		const loginData = {
+			email: formData.get("email"),
+			password: formData.get("password"),
+		};
+		fetchData("https://infrainsight.vercel.app/user/login", loginData);
 	}
 
 	return (
@@ -35,6 +40,9 @@ export default function Login({ ButtonGroup }) {
 					placeholder="Masukkan kata sandi"
 				/>
 			</div>
+			{isPending && <h1>Loading...</h1>}
+			{response && <h1>Response ok</h1>}
+			{error && <h1>error occured</h1>}
 			<ButtonGroup />
 		</form>
 	);
