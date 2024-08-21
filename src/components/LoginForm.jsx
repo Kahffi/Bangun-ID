@@ -13,7 +13,10 @@ export default function Login({ ButtonGroup }) {
 			email: formData.get("email"),
 			password: formData.get("password"),
 		};
-		fetchData("https://infrainsight.vercel.app/user/login", loginData);
+		fetchData("https://infrainsight.vercel.app/user/login", {
+			body: loginData,
+			method: "POST",
+		});
 	}
 
 	function ErrorMessage() {

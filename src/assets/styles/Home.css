@@ -13,8 +13,7 @@
 	background-color: var(--cl-white-bg);
 	display: flex;
 	flex-direction: column;
-	width: 70vw;
-	min-width: 400px;
+	width: clamp(400px, 70vw, 1200px);
 	height: 500px;
 	border-radius: 20;
 	overflow: hidden;
@@ -35,6 +34,8 @@
 	max-height: calc(100% - 52px);
 }
 
+/* text section of the post */
+
 .post-content.fullsize .content {
 	flex: 1;
 	overflow-y: auto;
@@ -45,7 +46,7 @@
 .post-content.fullsize .content article {
 	padding: 0.5rem 1.5rem;
 }
-
+/*  */
 .avatar-img {
 	width: 35px;
 	height: 35px;

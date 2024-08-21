@@ -7,23 +7,26 @@ function usePost() {
 
 	async function fetchData(
 		url,
-		body,
-		headers = { "Content-Type": "application/json" }
+		options = {
+			body: "",
+			headers: { "Content-Type": "application/json" },
+			method: "POST",
+		}
 	) {
 		setIsPending(true);
 		try {
 			setError(false);
 			const res = await fetch(url, {
-				method: "POST",
-				body: JSON.stringify(body),
-				headers: { ...headers },
+				method: options.method,
+				body: JSON.stringify(options.body),
+				headers: options.headers,
 			});
 			const resData = await res.json();
 
 			// check if the retrieved data ok to use
 			// if (resData.status !== 200)
 			// 	throw new Error(`${resData.status}, ${resData.message}`);
-			setData({ ...resData });
+			setData(resData);
 			console.log(resData, "GET Response data");
 		} catch (err) {
 			console.error(err);
