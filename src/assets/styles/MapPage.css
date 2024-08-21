@@ -1,0 +1,51 @@
+.map-wrapper {
+	height: 100%;
+	position: relative;
+}
+
+.search-box {
+	padding: 30px;
+	position: absolute;
+	top: 0; /* position the top  edge of the element at the middle of the parent */
+	left: 50%; /* position the left edge of the element at the middle of the parent */
+	z-index: 1000;
+	transform: translateX(-50%);
+}
+
+.search-box > .wrapper {
+	width: clamp(400px, 40vw, 700px);
+	background-color: var(--cl-white-bg);
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.search-bar {
+	width: 100%;
+	display: flex;
+}
+
+.search-bar input {
+	width: 100%;
+	font-size: 1rem;
+	padding: 0.6rem 0.7rem;
+	border: none;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.search-result {
+	padding: 1rem;
+	padding-bottom: 2rem;
+}
+
+.address-box {
+	padding: 0.5rem 0.3rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	border-bottom: 1px solid var(--cl-grey-ol);
+}
+
+.address-box:hover {
+	background-color: var(--cl-grey-ol);
+}

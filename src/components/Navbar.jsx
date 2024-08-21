@@ -1,5 +1,3 @@
-import "../assets/styles/navbar.css";
-
 export default function Navbar() {
 	return (
 		<nav className="navbar-wrapper">

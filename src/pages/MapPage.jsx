@@ -1,7 +1,9 @@
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import Navbar from "../components/Navbar";
-import "leaflet/dist/leaflet.css";
 import SearchBox from "../components/SearchBox";
+import "leaflet/dist/leaflet.css";
+
+import "../assets/styles/MapPage.css";
 
 export default function MapPage() {
 	return (
