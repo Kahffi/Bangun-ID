@@ -15,7 +15,11 @@ export default function Signup({ ButtonGroup }) {
 			email: formData.get("email"),
 			password: formData.get("password"),
 		};
-		fetchData("https://infrainsight.vercel.app/user/signup", signupData);
+		fetchData("https://infrainsight.vercel.app/user/signup", {
+			body: signupData,
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+		});
 	}
 	console.log(data);
 	return (
@@ -54,9 +58,7 @@ export default function Signup({ ButtonGroup }) {
 					name="username"
 				/>
 			</div>
-
-			{isPending && <h1>Loading</h1>}
-			{data && <h1>Request success</h1>}
+			{data && alert("Daftar akun berhasil")}
 			{error && <h1>Error Occured</h1>}
 
 			<ButtonGroup />

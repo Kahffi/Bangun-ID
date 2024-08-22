@@ -14,14 +14,14 @@ export default function AuthPage() {
 				<button className="auth-btn btn-pr" type="submit">
 					{section === "login" ? "Masuk" : "Daftar"}
 				</button>
-				<div className="separator">
+				{/* <div className="separator">
 					<hr />
 					<p>Opsi lain</p>
 				</div>
 				<button className="auth-btn btn-sc" type="button">
 					<FontAwesomeIcon icon={faGoogle} style={{ color: "#ffffff" }} />
 					Masuk dengan Google
-				</button>
+				</button> */}
 			</div>
 		);
 	}
@@ -34,9 +34,44 @@ export default function AuthPage() {
 
 	return (
 		<div id="auth-page">
-			<div className="auth-left"></div>
+			<div
+				className="auth-left"
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					height: "100%",
+					justifyContent: "flex-end",
+					color: "white",
+					padding: "1rem",
+					position: "relative",
+				}}
+			>
+				<div
+					style={{
+						color: "var(--cl-green-pr)",
+						width: "fit-content",
+						position: "absolute",
+						top: 0,
+						left: 0,
+						padding: "1rem",
+					}}
+				>
+					<h2
+						style={{
+							backgroundColor: "white",
+						}}
+					>
+						Bangun.ID
+					</h2>
+				</div>
+				<h1>
+					“Setiap kita bisa mengambil pelajaran, pembangunan membutuhkan
+					kedamaian dan keadilan”
+				</h1>
+				<h5>- Najwa Shihab -</h5>
+			</div>
 			<div className="auth-right">
-				<h2>Selamat Datang!</h2>
+				<h1>Selamat Datang!</h1>
 				{section === "login" ? (
 					<Login ButtonGroup={ButtonGroup} />
 				) : (

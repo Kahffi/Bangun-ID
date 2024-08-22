@@ -105,7 +105,7 @@ button {
 	display: flex;
 	background-color: var(--cl-white-bg);
 	align-items: center;
-	padding: 1rem 2rem;
+	padding: 0.7rem 2rem;
 }
 
 .navbar-wrapper .navbar-logo {

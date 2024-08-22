@@ -21,6 +21,9 @@ function usePost() {
 				body: JSON.stringify(options.body),
 				headers: options.headers,
 			});
+
+			if (!res.ok) throw new Error(res.status);
+
 			const resData = await res.json();
 
 			// check if the retrieved data ok to use

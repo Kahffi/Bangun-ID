@@ -4,29 +4,30 @@ import SearchBox from "../components/SearchBox";
 import "leaflet/dist/leaflet.css";
 
 import "../assets/styles/MapPage.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocation } from "@fortawesome/free-solid-svg-icons";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons/faLocationDot";
-import PostForm from "../components/PostForm";
-import usePost from "../usePost";
+import CreatePost from "../components/CreatePost";
+import PostMarker from "../components/PostMarker";
+import Post from "../components/Post";
 
-const NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse?";
+import UserIcon from "../assets/images/UserMarker.svg";
+import { Icon } from "leaflet";
 
-// Classes used by Leaflet to position controls
-const POSITION_CLASSES = {
-	bottomleft: "leaflet-bottom leaflet-left",
-	bottomright: "leaflet-bottom leaflet-right",
-	topleft: "leaflet-top leaflet-left",
-	topright: "leaflet-top leaflet-right",
+// testing only
+const post = {
+	id: 1,
+	title: "Jembatan rusak",
+	user: "Doe John",
+	description:
+		"human gentle nature another tail largest pot there length negative naturally eye electric automobile stream eaten flag point everywhere serious vegetable result ride shine smile stiff sink softly throughout fair activity everybody spent belt gas degree peace wear thy mixture offer center either occasionally theory way young flower",
+	location: [-6.21462, 106.84513],
 };
 
 function TrackLocationButton({ userPosition }) {
 	const map = useMap();
 
 	function toCurrentLocation() {
-		console.log("clicked");
-
 		userPosition && map.flyTo(userPosition, 16);
 	}
 
@@ -49,6 +50,8 @@ function TrackLocationButton({ userPosition }) {
 function UserLocationMarker({ userLocation, setUserLocation }) {
 	const map = useMap();
 
+	const userIcon = new Icon({ iconUrl: UserIcon, iconSize: [40, 40] });
+
 	useEffect(() => {
 		map.locate().on("locationfound", (location) => {
 			map.flyTo(location.latlng, 16);
@@ -58,89 +61,31 @@ function UserLocationMarker({ userLocation, setUserLocation }) {
 
 	return (
 		userLocation && (
-			<Marker position={userLocation}>
-				{" "}
+			<Marker position={userLocation} icon={userIcon}>
 				<Popup>Lokasi anda</Popup>
 			</Marker>
 		)
 	);
 }
 
-function CreatePost() {
-	const [location, setLocation] = useState(null);
-	const map = useMap();
-	const [section, setSection] = useState("location");
-	const { data, error, fetchData } = usePost();
-
-	const overlayRef = useRef();
-
-	function handleSelectLocation() {
-		const { lat, lng } = map.getCenter();
-		const params = {
-			lat: lat,
-			lon: lng,
-			format: "json",
-		};
-		const queryStr = new URLSearchParams(params);
-		fetchData(`${NOMINATIM_REVERSE_URL}${queryStr}`, { method: "GET" });
-		// const { lat, lng } = map.getCenter();
-		// setPostMarkers((prev) => (prev = [...prev, [lat, lng]]));
-		setSection("form");
-		setLocation([lat, lng]);
-		overlayRef.current.style.zIndex = "9999";
-	}
-	return (
-		<div
-			className="overlay-wrapper"
-			style={{
-				position: "absolute",
-				display: "flex",
-				width: "100%",
-				height: "100%",
-				zIndex: "500",
-				alignItems: "center",
-				justifyContent: "center",
-			}}
-			ref={overlayRef}
-		>
-			{section === "location" || error ? (
-				<>
-					<FontAwesomeIcon
-						icon={faLocationDot}
-						color="red"
-						fontSize={"2.6rem"}
-						style={{ zIndex: "1000" }}
-					/>
-					<div className="buttons-wrapper">
-						<h2 style={{ textAlign: "center" }}>Pilih Lokasi</h2>
-						<div style={{ display: "flex", gap: "1rem" }}>
-							<button type="button" className="btn-sc contain">
-								Batalkan {/* Routing balik ke home page*/}
-							</button>
-							<button
-								type="button"
-								className="btn-pr contain"
-								onClick={handleSelectLocation}
-							>
-								Konfirmasi
-							</button>
-						</div>
-					</div>
-				</>
-			) : data ? (
-				<PostForm addressName={data.display_name} coordinate={location} />
-			) : (
-				<h4>loading</h4>
-			)}
-		</div>
-	);
-}
-
 export default function MapPage() {
+	// testing only
+	const [posts, setPosts] = useState([{ ...post }]);
+
 	const [postMarkers, setPostMarkers] = useState([]);
 	const [userLocation, setUserLocation] = useState(null);
-	const [isCreatingPost, setIsCreatingPost] = useState(true);
-	console.log(postMarkers, "postMarkers");
+	// state untuk tracking user ketika membuat post
+	const [isCreatingPost, setIsCreatingPost] = useState(false);
+
+	// state untuk tracking marker di klik, menampilkan post
+	const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
+	// data postingan dari marker yang diklik
+	const [overlayData, setOverlayData] = useState(null);
+
+	function closeOverlay() {
+		setIsOverlayOpen(false);
+	}
 
 	return (
 		<>
@@ -155,7 +100,6 @@ export default function MapPage() {
 					<TileLayer
 						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-						className={POSITION_CLASSES.bottomleft}
 					/>
 					<SearchBox />
 					<TrackLocationButton userPosition={userLocation} />
@@ -169,7 +113,40 @@ export default function MapPage() {
 							setPostMarkers={setPostMarkers}
 						/>
 					)}
+
+					{posts.length > 0 &&
+						posts.map((p) => {
+							return (
+								<PostMarker
+									key={p.id}
+									post={p}
+									setOverlayData={setOverlayData}
+									setIsOverlayOpen={setIsOverlayOpen}
+								/>
+							);
+						})}
 				</MapContainer>
+				{isOverlayOpen && (
+					<div className="overlay-wrapper post-overlay">
+						<button
+							type="button"
+							onClick={closeOverlay}
+							style={{
+								position: "absolute",
+								top: "0",
+								right: "0",
+								background: "none",
+								color: "white",
+								paddingTop: "10px",
+								paddingRight: "10px",
+								fontSize: "1.3rem",
+							}}
+						>
+							X
+						</button>
+						<Post post={overlayData} />
+					</div>
+				)}
 			</main>
 		</>
 	);

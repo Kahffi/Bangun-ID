@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import usePost from "../usePost";
+import { useState } from "react";
 
 export default function PostForm({ addressName, coordinate }) {
 	// const [alamat, setAlamat] = useState("");
@@ -31,6 +30,7 @@ export default function PostForm({ addressName, coordinate }) {
 		formData.append("image", file);
 		formData.append("userId", "66c4d6f121fb46d5f461c879");
 		formData.append("koordinat", coordinate);
+		console.log(formData.get("alamat"), "alamat");
 
 		try {
 			const response = await fetch(
@@ -76,7 +76,6 @@ export default function PostForm({ addressName, coordinate }) {
 						type="text"
 						placeholder="Alamat"
 						value={addressName}
-						readOnly={true}
 						// onChange={(e) => setAlamat(e.target.value)}
 						style={{
 							flex: 1,

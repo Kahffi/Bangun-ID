@@ -4,11 +4,19 @@ import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
 
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 function App() {
 	return (
-		<div id="App">
-			<MapPage />
-		</div>
+		<BrowserRouter>
+			<div id="App">
+				<Routes>
+					<Route element={<HomePage />} path="/Home" />
+					<Route element={<MapPage />} path="/MapView" />
+					<Route element={<AuthPage />} path="/" />
+				</Routes>
+			</div>
+		</BrowserRouter>
 	);
 }
 

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import usePost from "../usePost";
+import { Navigate } from "react-router-dom";
 
 export default function Login({ ButtonGroup }) {
-	const { error, fetchData, isPending, data } = usePost();
+	const { error, fetchData, isPending, data: user } = usePost();
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -13,9 +14,13 @@ export default function Login({ ButtonGroup }) {
 			email: formData.get("email"),
 			password: formData.get("password"),
 		};
+
+		console.log(loginData);
+
 		fetchData("https://infrainsight.vercel.app/user/login", {
 			body: loginData,
 			method: "POST",
+			headers: { "Content-Type": "application/json" },
 		});
 	}
 
@@ -55,9 +60,10 @@ export default function Login({ ButtonGroup }) {
 					placeholder="Masukkan kata sandi"
 				/>
 			</div>
-			{isPending && <h1>Loading...</h1>}
-			{data && <h1>Response ok</h1>}
 			{error && <ErrorMessage />}
+			{!isPending && user ? (
+				<Navigate to={"/Home"} state={{ user: user.account, from: "auth" }} />
+			) : null}
 			<ButtonGroup />
 		</form>
 	);
