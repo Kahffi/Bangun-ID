@@ -8,7 +8,7 @@
 	position: absolute;
 	top: 0; /* position the top  edge of the element at the middle of the parent */
 	left: 50%; /* position the left edge of the element at the middle of the parent */
-	z-index: 1000;
+	z-index: 2000;
 	transform: translateX(-50%);
 }
 
@@ -47,4 +47,27 @@
 
 .address-box:hover {
 	background-color: var(--cl-grey-ol);
+}
+
+.overlay-wrapper {
+	position: "absolute";
+	display: "flex";
+	width: "100%";
+	height: "100%";
+	z-index: "500";
+	align-items: "center";
+	justify-content: "center";
+}
+
+.buttons-wrapper {
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 2rem;
+	padding: 0.5rem 1.5rem;
+	border-radius: 0.8rem;
+	background-color: var(--cl-white-bg);
+	width: clamp(200px, 40vw, 400px);
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
 }

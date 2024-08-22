@@ -4,10 +4,14 @@ import SearchBox from "../components/SearchBox";
 import "leaflet/dist/leaflet.css";
 
 import "../assets/styles/MapPage.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocation } from "@fortawesome/free-solid-svg-icons";
-import { Icon } from "leaflet";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons/faLocationDot";
+import PostForm from "../components/PostForm";
+import usePost from "../usePost";
+
+const NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse?";
 
 // Classes used by Leaflet to position controls
 const POSITION_CLASSES = {
@@ -16,8 +20,6 @@ const POSITION_CLASSES = {
 	topleft: "leaflet-top leaflet-left",
 	topright: "leaflet-top leaflet-right",
 };
-
-const userPositionIcon = new Icon();
 
 function TrackLocationButton({ userPosition }) {
 	const map = useMap();
@@ -64,8 +66,81 @@ function UserLocationMarker({ userLocation, setUserLocation }) {
 	);
 }
 
+function CreatePost() {
+	const [location, setLocation] = useState(null);
+	const map = useMap();
+	const [section, setSection] = useState("location");
+	const { data, error, fetchData } = usePost();
+
+	const overlayRef = useRef();
+
+	function handleSelectLocation() {
+		const { lat, lng } = map.getCenter();
+		const params = {
+			lat: lat,
+			lon: lng,
+			format: "json",
+		};
+		const queryStr = new URLSearchParams(params);
+		fetchData(`${NOMINATIM_REVERSE_URL}${queryStr}`, { method: "GET" });
+		// const { lat, lng } = map.getCenter();
+		// setPostMarkers((prev) => (prev = [...prev, [lat, lng]]));
+		setSection("form");
+		setLocation([lat, lng]);
+		overlayRef.current.style.zIndex = "9999";
+	}
+	return (
+		<div
+			className="overlay-wrapper"
+			style={{
+				position: "absolute",
+				display: "flex",
+				width: "100%",
+				height: "100%",
+				zIndex: "500",
+				alignItems: "center",
+				justifyContent: "center",
+			}}
+			ref={overlayRef}
+		>
+			{section === "location" || error ? (
+				<>
+					<FontAwesomeIcon
+						icon={faLocationDot}
+						color="red"
+						fontSize={"2.6rem"}
+						style={{ zIndex: "1000" }}
+					/>
+					<div className="buttons-wrapper">
+						<h2 style={{ textAlign: "center" }}>Pilih Lokasi</h2>
+						<div style={{ display: "flex", gap: "1rem" }}>
+							<button type="button" className="btn-sc contain">
+								Batalkan {/* Routing balik ke home page*/}
+							</button>
+							<button
+								type="button"
+								className="btn-pr contain"
+								onClick={handleSelectLocation}
+							>
+								Konfirmasi
+							</button>
+						</div>
+					</div>
+				</>
+			) : data ? (
+				<PostForm addressName={data.display_name} coordinate={location} />
+			) : (
+				<h4>loading</h4>
+			)}
+		</div>
+	);
+}
+
 export default function MapPage() {
+	const [postMarkers, setPostMarkers] = useState([]);
 	const [userLocation, setUserLocation] = useState(null);
+	const [isCreatingPost, setIsCreatingPost] = useState(true);
+	console.log(postMarkers, "postMarkers");
 
 	return (
 		<>
@@ -88,6 +163,12 @@ export default function MapPage() {
 						userLocation={userLocation}
 						setUserLocation={setUserLocation}
 					/>
+					{isCreatingPost && (
+						<CreatePost
+							setIsCreatingPost={setIsCreatingPost}
+							setPostMarkers={setPostMarkers}
+						/>
+					)}
 				</MapContainer>
 			</main>
 		</>

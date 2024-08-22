@@ -72,10 +72,13 @@ button {
 	flex: 1;
 }
 
+button {
+	font-size: 1rem;
+}
+
 .btn-pr,
 .btn-sc {
 	color: var(--cl-white-sc);
-	font-size: 1rem;
 }
 
 .btn-pr.small,
@@ -95,6 +98,9 @@ button {
 .btn-sc {
 	background-color: var(--cl-grey-sc);
 }
+.btn-sc:hover {
+	background-color: #4d555e;
+}
 .navbar-wrapper {
 	display: flex;
 	background-color: var(--cl-white-bg);
@@ -109,4 +115,10 @@ button {
 .text-small.secondary {
 	font-size: 0.8rem;
 	color: var(--cl-grey-sc);
+}
+
+button.contain {
+	border-radius: 0.8rem;
+	padding: 0.8rem 1rem;
+	width: 100%;
 }
