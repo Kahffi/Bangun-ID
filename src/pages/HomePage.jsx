@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import Post from "../components/Post";
 import "../assets/styles/Home.css";
 import { useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
 
 const post = {
 	title: "Jembatan rusak",
@@ -22,7 +24,7 @@ export default function HomePage() {
 	return (
 		<>
 			<Navbar />
-			<main className="home-wrapper">
+			<main className="home-wrapper" style={{ position: "relative" }}>
 				{posts.map((post, idx) => {
 					console.log("am i running?");
 					return (
@@ -31,6 +33,24 @@ export default function HomePage() {
 						</>
 					);
 				})}
+
+				<div
+					style={{
+						position: "absolute",
+						bottom: "0",
+						right: "0",
+						paddingRight: "30px",
+						paddingBottom: "30px",
+					}}
+				>
+					<button
+						type="button"
+						className="btn-pr"
+						style={{ borderRadius: "100%", padding: ".4rem" }}
+					>
+						<FontAwesomeIcon icon={faAdd} fontSize={"2.3rem"} color="white" />
+					</button>
+				</div>
 			</main>
 		</>
 	);
