@@ -15,8 +15,7 @@
 .search-box > .wrapper {
 	width: clamp(400px, 40vw, 700px);
 	background-color: var(--cl-white-bg);
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	border-radius: 10px;
 }
 
 .search-bar {

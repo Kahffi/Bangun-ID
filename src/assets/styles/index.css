@@ -88,6 +88,10 @@ button {
 	background-color: var(--cl-blue-pr);
 }
 
+.btn-pr:hover {
+	background-color: #0957a0;
+}
+
 .btn-sc {
 	background-color: var(--cl-grey-sc);
 }

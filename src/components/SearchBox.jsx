@@ -57,21 +57,32 @@ export default function SearchBox() {
 				{console.log(data, "myboy")}
 				<form className="search-bar" onSubmit={handleSearch}>
 					<input type="search" placeholder="Cari alamat" name="search-value" />
-					<button type="submit">Cari</button>
+					<button
+						className="btn-pr "
+						type="submit"
+						style={{
+							borderTopRightRadius: "10px",
+							borderBottomRightRadius: "10px",
+							padding: "0 .8rem",
+						}}
+					>
+						Cari
+					</button>
 				</form>
 				<div className="search-result" ref={searchResultRef}>
-					{data.map((address) => {
-						console.log(address);
-						return (
-							<AddressBox
-								key={address.place_id}
-								address={address}
-								searchResultRef={searchResultRef}
-								error={error}
-							/>
-						);
-					})}
-					{data.length === 0 && <em>Terjadi kesalahan</em>}
+					{data &&
+						data.map((address) => {
+							console.log(address);
+							return (
+								<AddressBox
+									key={address.place_id}
+									address={address}
+									searchResultRef={searchResultRef}
+									error={error}
+								/>
+							);
+						})}
+					{data && data.length === 0 ? <em>Terjadi kesalahan</em> : null}
 				</div>
 			</div>
 		</div>
