@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post";
 import "../assets/styles/Home.css";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from "../App";
 
 const post = {
 	title: "Jembatan rusak",
@@ -18,6 +19,9 @@ export default function HomePage() {
 	const [posts, setPosts] = useState([{ ...post }]);
 	const location = useLocation();
 	const { from, user } = location.state;
+
+	// state untuk tracking user ketika membuat post
+	const { setIsCreatingPost, isCreatingPost } = useContext(AppContext);
 
 	console.log(user);
 
@@ -47,10 +51,14 @@ export default function HomePage() {
 						type="button"
 						className="btn-pr"
 						style={{ borderRadius: "100%", padding: ".4rem" }}
+						onClick={(e) => {
+							setIsCreatingPost(true);
+						}}
 					>
 						<FontAwesomeIcon icon={faAdd} fontSize={"2.3rem"} color="white" />
 					</button>
 				</div>
+				{isCreatingPost && <Navigate to={"/MapView"} />}
 			</main>
 		</>
 	);

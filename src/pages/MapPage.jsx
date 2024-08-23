@@ -4,7 +4,7 @@ import SearchBox from "../components/SearchBox";
 import "leaflet/dist/leaflet.css";
 
 import "../assets/styles/MapPage.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocation } from "@fortawesome/free-solid-svg-icons";
 import CreatePost from "../components/CreatePost";
@@ -13,6 +13,7 @@ import Post from "../components/Post";
 
 import UserIcon from "../assets/images/UserMarker.svg";
 import { Icon } from "leaflet";
+import { AppContext } from "../App";
 
 // testing only
 const post = {
@@ -75,7 +76,7 @@ export default function MapPage() {
 	const [postMarkers, setPostMarkers] = useState([]);
 	const [userLocation, setUserLocation] = useState(null);
 	// state untuk tracking user ketika membuat post
-	const [isCreatingPost, setIsCreatingPost] = useState(false);
+	const { isCreatingPost, setIsCreatingPost } = useContext(AppContext);
 
 	// state untuk tracking marker di klik, menampilkan post
 	const [isOverlayOpen, setIsOverlayOpen] = useState(false);
