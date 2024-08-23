@@ -18,13 +18,12 @@ const post = {
 export default function HomePage() {
 	const [posts, setPosts] = useState([{ ...post }]);
 	const location = useLocation();
-	const { from, user } = location.state;
+	const { user } = useContext(AppContext);
 
 	// state untuk tracking user ketika membuat post
 	const { setIsCreatingPost, isCreatingPost } = useContext(AppContext);
 
 	console.log(user);
-
 	return (
 		<>
 			<Navbar />

@@ -108,3 +108,12 @@
 .interaction-wrapper button:active {
 	font-size: 1rem;
 }
+
+.navbar-btn {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	cursor: pointer;
+}

@@ -2,8 +2,10 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PostForm from "./PostForm";
 import { useMap } from "react-leaflet";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import usePost from "../usePost";
+import { AppContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse?";
 
@@ -12,6 +14,10 @@ export default function CreatePost() {
 	const map = useMap();
 	const [section, setSection] = useState("location");
 	const { data, error, fetchData } = usePost();
+
+	const { setIsCreatingPost } = useContext(AppContext);
+
+	const navigate = useNavigate();
 
 	const overlayRef = useRef();
 
@@ -43,7 +49,14 @@ export default function CreatePost() {
 					<div className="buttons-wrapper">
 						<h2 style={{ textAlign: "center" }}>Pilih Lokasi</h2>
 						<div style={{ display: "flex", gap: "1rem" }}>
-							<button type="button" className="btn-sc contain">
+							<button
+								type="button"
+								className="btn-sc contain"
+								onClick={() => {
+									setIsCreatingPost(false);
+									navigate("/Home");
+								}}
+							>
 								Batalkan {/* Routing balik ke home page*/}
 							</button>
 							<button

@@ -10,8 +10,11 @@ export const AppContext = createContext();
 
 function App() {
 	const [isCreatingPost, setIsCreatingPost] = useState(false);
+	const [user, setUser] = useState(null);
 	return (
-		<AppContext.Provider value={{ isCreatingPost, setIsCreatingPost }}>
+		<AppContext.Provider
+			value={{ isCreatingPost, setIsCreatingPost, user, setUser }}
+		>
 			<BrowserRouter>
 				<div id="App">
 					<Routes>

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import usePost from "../usePost";
 import { Navigate } from "react-router-dom";
+import { AppContext } from "../App";
 
 export default function Login({ ButtonGroup }) {
 	const { error, fetchData, isPending, data: user } = usePost();
+	const { setUser } = useContext(AppContext);
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -61,9 +63,8 @@ export default function Login({ ButtonGroup }) {
 				/>
 			</div>
 			{error && <ErrorMessage />}
-			{!isPending && user ? (
-				<Navigate to={"/Home"} state={{ user: user.account, from: "auth" }} />
-			) : null}
+			{user && setUser(user)}
+			{!isPending && user ? <Navigate to={"/Home"} /> : null}
 			<ButtonGroup />
 		</form>
 	);
