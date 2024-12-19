@@ -1,8 +1,5 @@
-# React + Vite
+# Bangun-ID
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application to report damaged public facilities & infrastructures via intagram-like features where user can likes and comments to the report. Made with React, Express.JS, MongoDB, and React-Leaflet.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project was inspired by the recent "No viral no justice" phenomenon in Indonesia, with this project we hope that the users could raise the issue so it could be heard by the goverment so the issue can be fixed ASAP
